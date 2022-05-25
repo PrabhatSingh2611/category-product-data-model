@@ -33,6 +33,6 @@ public class CategoryEntity {
     private String name;
     @Column(name = "quantity")
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id_fk", referencedColumnName = "product_id")
+    @JoinColumn(name = "product_id_fk")
     private List<ProductEntity> products;
 }

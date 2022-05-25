@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/product/")
+@RequestMapping(path = "api")
 public class ProductController {
 
     @Autowired
@@ -26,17 +26,17 @@ public class ProductController {
         this.service = service;
     }
 
-    @GetMapping(path = "{id}")
+    @GetMapping("/byId/{id}")
     public ProductEntity findById(@PathVariable Long id) throws DataNotFoundException {
         return service.findById(id);
     }
 
-    @GetMapping(path = "{name}")
+    @GetMapping("/byName/{name}")
     public ProductEntity getProductByName(@PathVariable String name) {
         return service.getProductByName(name);
     }
 
-    @GetMapping(path = "{price}")
+    @GetMapping("/byPrice/{price}")
     public ProductEntity getProductByPrice(double price) {
         return service.getProductByPrice(price);
     }
@@ -46,7 +46,7 @@ public class ProductController {
         return service.getAllProducts();
     }
 
-    @PostMapping(path = "/createProduct")
+    @PostMapping("/createProduct")
     public ProductEntity createProduct(@RequestBody ProductEntity product) {
         return service.createProduct(product);
     }

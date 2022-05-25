@@ -26,7 +26,6 @@ import java.time.LocalDate;
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @ManyToOne(cascade = CascadeType.ALL)
     @Column(name = "product_id")
     private int id;
     @Column(name = "name")

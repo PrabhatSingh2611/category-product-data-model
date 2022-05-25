@@ -5,10 +5,12 @@ import com.category.category.product.Exception.DataNotFoundException;
 import com.category.category.product.Repository.ProductRepository;
 import com.category.category.product.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
 @Autowired
