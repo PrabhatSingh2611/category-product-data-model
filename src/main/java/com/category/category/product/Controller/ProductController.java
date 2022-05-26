@@ -4,6 +4,7 @@ import com.category.category.product.Entity.ProductEntity;
 import com.category.category.product.Exception.DataNotFoundException;
 import com.category.category.product.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api")
+@RequestMapping(path = "api/product")
 public class ProductController {
 
     @Autowired
@@ -46,6 +47,12 @@ public class ProductController {
         return service.getAllProducts();
     }
 
+    @GetMapping("/paginationAndSort/{offset}/{pagesize}/{field}")
+    public Page<ProductEntity> getProductByPaginationAndSorting(@PathVariable int offset, @PathVariable int pagesize, @PathVariable String field) {
+        Page<ProductEntity> products = service.getProductByPaginationAndSorting(offset, pagesize, field);
+        return products;
+    }
+
     @PostMapping("/createProduct")
     public ProductEntity createProduct(@RequestBody ProductEntity product) {
         return service.createProduct(product);
@@ -56,12 +63,12 @@ public class ProductController {
         return service.createProducts(products);
     }
 
-    @PutMapping(path = "/updateProduct")
+    @PutMapping(path = "/updateProduct/{id}")
     public ProductEntity updateProduct(@RequestBody ProductEntity newProduct) {
         return service.updateProduct(newProduct);
     }
 
-    @DeleteMapping(path = "/deleteMapping")
+    @DeleteMapping(path = "/deleteMapping/{id}")
     public String deleteCategoryById(Long id) {
         return service.deleteProductById(id);
     }

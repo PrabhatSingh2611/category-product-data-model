@@ -5,6 +5,9 @@ import com.category.category.product.Exception.DataNotFoundException;
 import com.category.category.product.Repository.ProductRepository;
 import com.category.category.product.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +45,12 @@ private final ProductRepository repository;
     @Override
     public List<ProductEntity> getAllProducts() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<ProductEntity> getProductByPaginationAndSorting(int offset, int pagesize, String field) {
+        Page<ProductEntity> products = repository.findAll(PageRequest.of(offset, pagesize).withSort(Sort.by(Sort.Direction.ASC,field)));
+        return products;
     }
 
     @Override

@@ -2,11 +2,13 @@ package com.category.category.product.Service.ServiceImpl;
 
 
 import com.category.category.product.Entity.CategoryEntity;
-import com.category.category.product.Entity.ProductEntity;
 import com.category.category.product.Exception.DataNotFoundException;
 import com.category.category.product.Repository.CategoryRepository;
 import com.category.category.product.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +43,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryEntity> getAllCategories() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<CategoryEntity> getCategoryByPaginationAndSorting(int offset, int pagesize, String field) {
+        Page<CategoryEntity> categories = repository.findAll(PageRequest.of(offset, pagesize).withSort(Sort.by(Sort.Direction.ASC, field)));
+        return categories;
     }
 
     @Override
